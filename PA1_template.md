@@ -5,9 +5,9 @@
 library(readr)
 library(dplyr)
 ```
-
+#####################################
 ## Loading and preprocessing the data
-
+#####################################
 
 ```r
 activity <- read_csv("~/R Workspace/RepData_PeerAssessment1/activity.csv")
@@ -36,7 +36,7 @@ head(activity)
 
 ## What is mean total number of steps taken per day?
 
-### 1 -Calculate the total number of steps taken per day
+### 1 - Calculate the total number of steps taken per day
 
 ```r
 y <- group_by(activity, date)
@@ -55,22 +55,24 @@ head(tot_steps)
 ## 5 2012-10-05        13294
 ## 6 2012-10-06        15420
 ```
-### An histogram of the total number of steps taken each day
+### 2 - Make a histogram of the total number of steps taken each day
 
 
 ```r
-plot(tot_steps$date,tot_steps$`sum(steps)`, type = 'h', lwd = 8, xlab = "data", ylab = "Total steps for day", col = "gray", main ="The total number of steps taken each day")
+plot(tot_steps$date,tot_steps$`sum(steps)`, type = 'h', lwd = 8, xlab = "data", ylab = "Steps for day", col = "gray", main ="The total number of steps taken each day")
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
 
-## Calculate and report the mean and median of the total number of steps taken per day
+### 3 - Calculate and report the mean and median of the total number of steps taken per day
+
+
+### An histogram of the mean number of steps taken each day
 
 
 ```r
 z <- group_by(activity, date)
 mean_steps <- summarise(z, mean(steps))
-median_steps <- summarise(z, median(steps))
 head(mean_steps)
 ```
 
@@ -86,23 +88,17 @@ head(mean_steps)
 ## 6 2012-10-06      53.54167
 ```
 
+##
+
+
 ```r
-head(median_steps)
+plot(mean_steps$date,mean_steps$`mean(steps)`, type = 'h', lwd = 8, xlab = "data", ylab = "Mean steps for day", col = "blue", main ="Steps taken (in mean) each day")
 ```
 
-```
-## # A tibble: 6 × 2
-##         date `median(steps)`
-##       <date>           <dbl>
-## 1 2012-10-01              NA
-## 2 2012-10-02               0
-## 3 2012-10-03               0
-## 4 2012-10-04               0
-## 5 2012-10-05               0
-## 6 2012-10-06               0
-```
+![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
 
-## Calculate the total number of steps taken per day
+
+### An histogram of the median number of steps taken each day
 
 ```r
 w <- group_by(activity, date)
@@ -121,6 +117,14 @@ head(median_steps)
 ## 5 2012-10-05               0
 ## 6 2012-10-06               0
 ```
+##
+
+
+```r
+plot(median_steps$date,median_steps$`median(steps)`, type = 'h', lwd = 8, xlab = "data", ylab = "Median steps for day", col = "green", main ="Steps taken (in median) each day")
+```
+
+![](PA1_template_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
 
 ## What is the average daily activity pattern?
 

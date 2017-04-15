@@ -10,48 +10,62 @@ library(readr)
 library(dplyr)
 
 ```
-
+#####################################
 ## Loading and preprocessing the data
-
+#####################################
 ```{r, message=FALSE, warning=FALSE}
 activity <- read_csv("~/R Workspace/RepData_PeerAssessment1/activity.csv")
 dim(activity) 
 head(activity)
 ```
+#######################################################
+## What is mean total number of steps taken per day? ##
+#######################################################
 
-## What is mean total number of steps taken per day?
-
-### 1 -Calculate the total number of steps taken per day
+### 1 - Calculate the total number of steps taken per day
 ```{r}
 y <- group_by(activity, date)
 tot_steps <- summarise(y, sum(steps))
 head(tot_steps)
 ```
-### An histogram of the total number of steps taken each day
+### 2 - Make a histogram of the total number of steps taken each day
 
 ```{r}
-plot(tot_steps$date,tot_steps$`sum(steps)`, type = 'h', lwd = 8, xlab = "data", ylab = "Total steps for day", col = "gray", main ="The total number of steps taken each day")
+plot(tot_steps$date,tot_steps$`sum(steps)`, type = 'h', lwd = 8, xlab = "data", ylab = "Steps for day", col = "gray", main ="The total number of steps taken each day")
 ```
 
-## Calculate and report the mean and median of the total number of steps taken per day
+### 3 - Calculate and report the mean and median of the total number of steps taken per day
+
+
+### An histogram of the mean number of steps taken each day
 
 ```{r}
 z <- group_by(activity, date)
 mean_steps <- summarise(z, mean(steps))
-median_steps <- summarise(z, median(steps))
 head(mean_steps)
-head(median_steps)
 ```
 
-## Calculate the total number of steps taken per day
+##
+
+```{r}
+plot(mean_steps$date,mean_steps$`mean(steps)`, type = 'h', lwd = 8, xlab = "data", ylab = "Mean steps for day", col = "blue", main ="Steps taken (in mean) each day")
+```
+
+
+### An histogram of the median number of steps taken each day
 ```{r}
 w <- group_by(activity, date)
 median_steps <- summarise(w, median(steps))
 head(median_steps)
 ```
+##
 
-## What is the average daily activity pattern?
-
+```{r}
+plot(median_steps$date,median_steps$`median(steps)`, type = 'h', lwd = 8, xlab = "data", ylab = "Median steps for day", col = "green", main ="Steps taken (in median) each day")
+```
+#################################################
+## What is the average daily activity pattern? ##
+#################################################
 
 
 ## Imputing missing values
@@ -62,5 +76,6 @@ x <- activity[!is.na(activity$steps),]
 dim(x)
 ```
 
-
-## Are there differences in activity patterns between weekdays and weekends?
+###############################################################################
+## Are there differences in activity patterns between weekdays and weekends? ##
+###############################################################################
