@@ -1,17 +1,25 @@
----
-title: "Reproducible Research: Peer Assessment 1"
-output: 
-  html_document:
-    keep_md: true
----
+# Reproducible Research: Peer Assessment 1
 
 
 ## Loading and preprocessing the data
 
-```{r, message=FALSE, warning=FALSE}
+
+```r
 library(readr)
 activity <- read_csv("~/R Workspace/RepData_PeerAssessment1/activity.csv")
 head(activity)
+```
+
+```
+## # A tibble: 6 × 3
+##   steps       date interval
+##   <int>     <date>    <int>
+## 1    NA 2012-10-01        0
+## 2    NA 2012-10-01        5
+## 3    NA 2012-10-01       10
+## 4    NA 2012-10-01       15
+## 5    NA 2012-10-01       20
+## 6    NA 2012-10-01       25
 ```
 
 
