@@ -55,6 +55,14 @@ head(tot_steps)
 ## 5 2012-10-05        13294
 ## 6 2012-10-06        15420
 ```
+### An histogram of the total number of steps taken each day
+
+
+```r
+plot(tot_steps$date,tot_steps$`sum(steps)`, type = 'h', lwd = 8, xlab = "data", ylab = "Total steps for day", col = "gray", main ="The total number of steps taken each day")
+```
+
+![](PA1_template_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
 
 ## Calculate and report the mean and median of the total number of steps taken per day
 
