@@ -120,11 +120,14 @@ $(document).ready(function () {
 </div>
 
 
+<pre class="r"><code>library(readr)
+library(dplyr)</code></pre>
 <div id="loading-and-preprocessing-the-data" class="section level2">
 <h2>Loading and preprocessing the data</h2>
-<pre class="r"><code>library(readr)
-activity &lt;- read_csv(&quot;~/R Workspace/RepData_PeerAssessment1/activity.csv&quot;)
-head(activity)</code></pre>
+<pre class="r"><code>activity &lt;- read_csv(&quot;~/R Workspace/RepData_PeerAssessment1/activity.csv&quot;)
+dim(activity) </code></pre>
+<pre><code>## [1] 17568     3</code></pre>
+<pre class="r"><code>head(activity)</code></pre>
 <pre><code>## # A tibble: 6 × 3
 ##   steps       date interval
 ##   &lt;int&gt;     &lt;date&gt;    &lt;int&gt;
@@ -137,12 +140,71 @@ head(activity)</code></pre>
 </div>
 <div id="what-is-mean-total-number-of-steps-taken-per-day" class="section level2">
 <h2>What is mean total number of steps taken per day?</h2>
+<div id="calculate-the-total-number-of-steps-taken-per-day" class="section level3">
+<h3>1 -Calculate the total number of steps taken per day</h3>
+<pre class="r"><code>y &lt;- group_by(activity, date)
+tot_steps &lt;- summarise(y, sum(steps))
+head(tot_steps)</code></pre>
+<pre><code>## # A tibble: 6 × 2
+##         date `sum(steps)`
+##       &lt;date&gt;        &lt;int&gt;
+## 1 2012-10-01           NA
+## 2 2012-10-02          126
+## 3 2012-10-03        11352
+## 4 2012-10-04        12116
+## 5 2012-10-05        13294
+## 6 2012-10-06        15420</code></pre>
+</div>
+</div>
+<div id="calculate-and-report-the-mean-and-median-of-the-total-number-of-steps-taken-per-day" class="section level2">
+<h2>Calculate and report the mean and median of the total number of steps taken per day</h2>
+<pre class="r"><code>z &lt;- group_by(activity, date)
+mean_steps &lt;- summarise(z, mean(steps))
+median_steps &lt;- summarise(z, median(steps))
+head(mean_steps)</code></pre>
+<pre><code>## # A tibble: 6 × 2
+##         date `mean(steps)`
+##       &lt;date&gt;         &lt;dbl&gt;
+## 1 2012-10-01            NA
+## 2 2012-10-02       0.43750
+## 3 2012-10-03      39.41667
+## 4 2012-10-04      42.06944
+## 5 2012-10-05      46.15972
+## 6 2012-10-06      53.54167</code></pre>
+<pre class="r"><code>head(median_steps)</code></pre>
+<pre><code>## # A tibble: 6 × 2
+##         date `median(steps)`
+##       &lt;date&gt;           &lt;dbl&gt;
+## 1 2012-10-01              NA
+## 2 2012-10-02               0
+## 3 2012-10-03               0
+## 4 2012-10-04               0
+## 5 2012-10-05               0
+## 6 2012-10-06               0</code></pre>
+</div>
+<div id="calculate-the-total-number-of-steps-taken-per-day-1" class="section level2">
+<h2>Calculate the total number of steps taken per day</h2>
+<pre class="r"><code>w &lt;- group_by(activity, date)
+median_steps &lt;- summarise(w, median(steps))
+head(median_steps)</code></pre>
+<pre><code>## # A tibble: 6 × 2
+##         date `median(steps)`
+##       &lt;date&gt;           &lt;dbl&gt;
+## 1 2012-10-01              NA
+## 2 2012-10-02               0
+## 3 2012-10-03               0
+## 4 2012-10-04               0
+## 5 2012-10-05               0
+## 6 2012-10-06               0</code></pre>
 </div>
 <div id="what-is-the-average-daily-activity-pattern" class="section level2">
 <h2>What is the average daily activity pattern?</h2>
 </div>
 <div id="imputing-missing-values" class="section level2">
 <h2>Imputing missing values</h2>
+<pre class="r"><code>x &lt;- activity[!is.na(activity$steps),]
+dim(x)</code></pre>
+<pre><code>## [1] 15264     3</code></pre>
 </div>
 <div id="are-there-differences-in-activity-patterns-between-weekdays-and-weekends" class="section level2">
 <h2>Are there differences in activity patterns between weekdays and weekends?</h2>

@@ -5,19 +5,44 @@ output:
     keep_md: true
 ---
 
+```{r, message=FALSE, warning=FALSE}
+library(readr)
+library(dplyr)
+```
 
 ## Loading and preprocessing the data
 
 ```{r, message=FALSE, warning=FALSE}
-library(readr)
 activity <- read_csv("~/R Workspace/RepData_PeerAssessment1/activity.csv")
+dim(activity) 
 head(activity)
 ```
 
-
 ## What is mean total number of steps taken per day?
 
+### 1 -Calculate the total number of steps taken per day
+```{r}
+y <- group_by(activity, date)
+tot_steps <- summarise(y, sum(steps))
+head(tot_steps)
+```
 
+## Calculate and report the mean and median of the total number of steps taken per day
+
+```{r}
+z <- group_by(activity, date)
+mean_steps <- summarise(z, mean(steps))
+median_steps <- summarise(z, median(steps))
+head(mean_steps)
+head(median_steps)
+```
+
+## Calculate the total number of steps taken per day
+```{r}
+w <- group_by(activity, date)
+median_steps <- summarise(w, median(steps))
+head(median_steps)
+```
 
 ## What is the average daily activity pattern?
 
@@ -25,6 +50,11 @@ head(activity)
 
 ## Imputing missing values
 
+
+```{r}
+x <- activity[!is.na(activity$steps),]
+dim(x)
+```
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
