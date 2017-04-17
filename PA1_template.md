@@ -1,16 +1,15 @@
 # Reproducible Research: Peer Assessment 1
+## 
 
 
-```r
-library(readr)
-library(dplyr)
-```
-#####################################
 ## Loading and preprocessing the data
-#####################################
+
 
 ```r
 activity <- read_csv("~/R Workspace/RepData_PeerAssessment1/activity.csv")
+```
+
+```r
 dim(activity) 
 ```
 
@@ -34,13 +33,36 @@ head(activity)
 ## 6    NA 2012-10-01       25
 ```
 
-## What is mean total number of steps taken per day?
+```r
+str(activity)
+```
+
+```
+## Classes 'tbl_df', 'tbl' and 'data.frame':	17568 obs. of  3 variables:
+##  $ steps   : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ date    : Date, format: "2012-10-01" "2012-10-01" ...
+##  $ interval: int  0 5 10 15 20 25 30 35 40 45 ...
+##  - attr(*, "spec")=List of 2
+##   ..$ cols   :List of 3
+##   .. ..$ steps   : list()
+##   .. .. ..- attr(*, "class")= chr  "collector_integer" "collector"
+##   .. ..$ date    :List of 1
+##   .. .. ..$ format: chr ""
+##   .. .. ..- attr(*, "class")= chr  "collector_date" "collector"
+##   .. ..$ interval: list()
+##   .. .. ..- attr(*, "class")= chr  "collector_integer" "collector"
+##   ..$ default: list()
+##   .. ..- attr(*, "class")= chr  "collector_guess" "collector"
+##   ..- attr(*, "class")= chr "col_spec"
+```
+
+## What is mean total number of steps taken per day? ##
 
 ### 1 - Calculate the total number of steps taken per day
 
 ```r
 y <- group_by(activity, date)
-tot_steps <- summarise(y, sum(steps))
+tot_steps <- summarise(y, sum(steps)) # Sum calculation
 head(tot_steps)
 ```
 
@@ -59,20 +81,20 @@ head(tot_steps)
 
 
 ```r
-plot(tot_steps$date,tot_steps$`sum(steps)`, type = 'h', lwd = 8, xlab = "data", ylab = "Steps for day", col = "gray", main ="The total number of steps taken each day")
+plot(tot_steps$date,tot_steps$`sum(steps)`, type = 'h', lwd = 8, xlab = "data", 
+     ylab = "Steps for day", col = "gray", main ="The total number of steps taken each day")
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
 
-### 3 - Calculate and report the mean and median of the total number of steps taken per day
+## 3 - Calculate and report the mean and median of the total number of steps taken per day
 
-
-### An histogram of the mean number of steps taken each day
+**a) - An histogram of the mean number of steps taken each day**
 
 
 ```r
 z <- group_by(activity, date)
-mean_steps <- summarise(z, mean(steps))
+mean_steps <- summarise(z, mean(steps)) # Mean calculation
 head(mean_steps)
 ```
 
@@ -88,8 +110,6 @@ head(mean_steps)
 ## 6 2012-10-06      53.54167
 ```
 
-##
-
 
 ```r
 plot(mean_steps$date,mean_steps$`mean(steps)`, type = 'h', lwd = 8, xlab = "data", ylab = "Mean steps for day", col = "blue", main ="Steps taken (in mean) each day")
@@ -97,12 +117,12 @@ plot(mean_steps$date,mean_steps$`mean(steps)`, type = 'h', lwd = 8, xlab = "data
 
 ![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
 
+**b) - An histogram of the median number of steps taken each day**
 
-### An histogram of the median number of steps taken each day
 
 ```r
 w <- group_by(activity, date)
-median_steps <- summarise(w, median(steps))
+median_steps <- summarise(w, median(steps)) #Median calculation
 head(median_steps)
 ```
 
@@ -119,29 +139,48 @@ head(median_steps)
 ```
 ##
 
-
 ```r
-plot(median_steps$date,median_steps$`median(steps)`, type = 'h', lwd = 8, xlab = "data", ylab = "Median steps for day", col = "green", main ="Steps taken (in median) each day")
+plot(median_steps$date,median_steps$`median(steps)`, type = 'h', lwd = 8, xlab = "data", ylab = "Median steps for day", col = "orange", main ="Steps taken (in median) each day")
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
 
-## What is the average daily activity pattern?
-
-
-
-## Imputing missing values
-
+## What is the average daily activity pattern? 
 
 
 ```r
-x <- activity[!is.na(activity$steps),]
+plot(activity$date,activity$steps, type = 'l',lwd = 1, xlab = "data", 
+     ylab = "Steps for day", main ="The total number of steps taken each day")
+abline(h = 10766.19, col = "red")
+```
+
+![](PA1_template_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
+
+## Imputing missing values
+
+```r
+num_NA <- activity[is.na(activity$steps),] # Count missin value
+dim(num_NA)
+```
+
+```
+## [1] 2304    3
+```
+
+
+```r
+t <- activity[activity$steps > 0, ] # Remove zero value
+```
+
+
+```r
+x <- activity[!is.na(activity$steps),] # Remove missin value
 dim(x)
 ```
 
 ```
 ## [1] 15264     3
 ```
-
-
-## Are there differences in activity patterns between weekdays and weekends?
+##
+## Are there differences in activity patterns between weekdays and weekends? 
+##
