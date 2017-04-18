@@ -54,7 +54,7 @@ tail(mean.steps.4day)
 
 #####2 - Make a histogram of the total number of steps taken each day
 
-```{r,hist.mean.steps.4day, message=TRUE, warning=TRUE}
+```{r,first.histogram, message=TRUE, warning=TRUE}
 hist(mean.steps.4day$mean, xlab = "Daily Number of Steps", main = "Total number of steps taken each day")
 rug(mean.steps.4day$mean)
 ```
@@ -149,7 +149,7 @@ tail(mean.steps.4day2)
 
 #####2 - Make a histogram of the total number of steps taken each day
 
-```{r, make a histogram, message=TRUE, warning=TRUE}
+```{r, second.histogram, message=TRUE, warning=TRUE}
 hist(mean.steps.4day2$mean, xlab = "Daily Number of Steps", main = "Total number of steps taken each day")
 rug(mean.steps.4day2$mean)
 ```

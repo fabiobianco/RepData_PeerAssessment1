@@ -9,7 +9,7 @@ by Fabio Bianchini
 
 
 ```
-## [1] "Mar Apr 18 18 17:43:15 2017"
+## [1] "Mar Apr 18 18 17:46:41 2017"
 ```
 
 ## Loading and preprocessing the data
@@ -147,7 +147,7 @@ hist(mean.steps.4day$mean, xlab = "Daily Number of Steps", main = "Total number 
 rug(mean.steps.4day$mean)
 ```
 
-![](figure/hist.mean.steps.4day-1.png)<!-- -->
+![](figure/first.histogram-1.png)<!-- -->
 
 #####3 - Calculate and report the **mean** and **median** of the total number of steps taken per day
 
@@ -381,7 +381,7 @@ hist(mean.steps.4day2$mean, xlab = "Daily Number of Steps", main = "Total number
 rug(mean.steps.4day2$mean)
 ```
 
-![](figure/make a histogram-1.png)<!-- -->
+![](figure/second.histogram-1.png)<!-- -->
 
 
 ```r
