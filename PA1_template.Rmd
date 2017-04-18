@@ -13,78 +13,129 @@ library(ggplot2)
 
 ## Loading and preprocessing the data
 
+#### 1) - Load the data
 ```{r, message=FALSE, warning=FALSE}
 activity <- read_csv("~/R Workspace/RepData_PeerAssessment1/activity.csv")
 ```
+#### 2) - Process/transform the data (if necessary) into a format suitable for your analysis
+
 ```{r}
+summary(activity)
 dim(activity) 
 head(activity)
+tail(activity)
 str(activity)
 ```
 
-## What is mean total number of steps taken per day? ##
+## What is mean total number of steps taken per day? 
 
-### 1 - Calculate the total number of steps taken per day
+#### 1) - Calculate the total number of steps taken per day
 ```{r}
 y <- group_by(activity, date)
-tot_steps <- summarise(y, sum(steps)) # Sum calculation
+tot_steps <- summarise(y, sum = sum(steps, na.rm = TRUE)) # Sum calculation
 head(tot_steps)
+tail(tot_steps)
 ```
-### 2 - Make a histogram of the total number of steps taken each day
+
+```{r, echo=TRUE}
+mean(tot_steps$sum) # Mean of the total number of steps taken per day
+median(tot_steps$sum) # Median of the total number of steps taken per day
+```
+
+#### 2) - Make a histogram of the total number of steps taken each day
 
 ```{r}
-plot(tot_steps$date,tot_steps$`sum(steps)`, type = 'h', lwd = 8, xlab = "data", 
+# plot total number of steps taken per day
+plot(tot_steps$date,tot_steps$sum, type = 'h', lwd = 8, xlab = "data", 
      ylab = "Steps for day", col = "gray", main ="The total number of steps taken each day")
-```
-
-## 3 - Calculate and report the mean and median of the total number of steps taken per day
-
-**a) - An histogram of the mean number of steps taken each day**
-
-```{r}
-z <- group_by(activity, date)
-mean_steps <- summarise(z, mean(steps)) # Mean calculation
-head(mean_steps)
-```
-
-```{r}
-plot(mean_steps$date,mean_steps$`mean(steps)`, type = 'h', lwd = 8, xlab = "data", ylab = "Mean steps for day", col = "blue", main ="Steps taken (in mean) each day")
-```
-#
-**b) - An histogram of the median number of steps taken each day**
-
-```{r}
-w <- group_by(activity, date)
-median_steps <- summarise(w, median(steps)) #Median calculation
-head(median_steps)
-```
-##
-```{r}
-plot(median_steps$date,median_steps$`median(steps)`, type = 'h', lwd = 8, xlab = "data", ylab = "Median steps for day", col = "orange", main ="Steps taken (in median) each day")
+# report the mean (red) and median (blue) of the total number of steps taken per day
+abline(h= mean(tot_steps$sum), col = "red",lwd=2, lty=2)
+abline(h= median(tot_steps$sum), col = "blue",lwd=2, lty=6)
+# Add a legend
+legend("topright", legend=c("Mean", "Median"),
+       col=c("red", "blue"), lty=2:6, cex=0.8)
 ```
 
 ## What is the average daily activity pattern? 
 
+#### 1) - Make a time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)**
 ```{r}
-plot(activity$date,activity$steps, type = 'l',lwd = 1, xlab = "data", 
-     ylab = "Steps for day", main ="The total number of steps taken each day")
-abline(h = 10766.19, col = "red")
+q <- group_by(activity, interval)
+p <- summarise(q, mean = mean(steps, na.rm = TRUE)) # Mean calculation
+head(p)
+tail(p)
 ```
+
+```{r}
+plot(p$interval,p$mean, type = 'l', lwd = 1, xlab = "5-minute interval in a day", ylab = "Average steps for day", col = "black", main ="The average daily activity pattern")
+```
+
+#### 2) - Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
+
+```{r}
+max_int <- filter(p, mean == max(p$mean))
+max_int
+```
+*interval number 835 contains the maximum number of steps*
 
 ## Imputing missing values
+
+#### 1) - Total number of missing values in the dataset
+
 ```{r}
-num_NA <- activity[is.na(activity$steps),] # Count missin value
+num_NA <- activity[is.na(activity$steps),] # Count missing value
 dim(num_NA)
 ```
-
+#### 2) - Filling in all of the missing values in the dataset. 
+*As a strategy for filling in all of the missing values in the dataset I will use the median for that day*
 ```{r}
-t <- activity[activity$steps > 0, ] # Remove zero value
+df1 <- activity
+df1 <- mutate(df1, steps = ifelse(is.na(steps),median(steps, na.rm = TRUE),steps)) # 
+head(df1)
+tail(df1)
+```
+#### 4) - Make a histogram of the total number of steps taken each day. Calculate and report the mean and median total number of steps taken per day
+```{r}
+df2 <- group_by(df1, date)
+df3 <- summarise(df2, sum = sum(steps, na.rm = TRUE)) # Sum calculation
+head(df3)
 ```
 
 ```{r}
-x <- activity[!is.na(activity$steps),] # Remove missin value
+plot(df3$date,df3$sum, type = 'h', lwd = 8, xlab = "data", 
+     ylab = "Steps for day", col = "gray", main ="The total number of steps taken each day")
+```
+
+**report the mean and median total number of steps taken per day**
+```{r}
+df4 <- group_by(df1, date)
+df5 <- summarise(df4, mean = mean(steps, na.rm = TRUE)) # Mean calculation
+head(df4)
+```
+
+```{r}
+plot(df5$date, df5$mean, type = 'h', lwd = 8, xlab = "data", 
+     ylab = "Mean steps for day", col = "blue", main ="Steps taken (in mean) each day")
+```
+
+```{r}
+df6 <- group_by(df1, date)
+df7 <- summarise(df6, median = median(steps, na.rm = TRUE)) # Median calculation
+head(df7)
+```
+
+```{r}
+plot(df7$date, df7$median, type = 'h', lwd = 8, xlab = "data", 
+     ylab = "Median steps for day", col = "orange", main ="Steps taken (in median) each day")
+```
+```{r}
+x <- activity[!is.na(activity$steps),] # Remove missing value
 dim(x)
 ```
+
 ##
 ## Are there differences in activity patterns between weekdays and weekends? 
 ##
+#### 1) - Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day
+
+#### 2) - Make a panel plot containing a time series plot (i.e. 𝚝𝚢𝚙𝚎 = "𝚕") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis)
