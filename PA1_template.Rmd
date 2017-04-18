@@ -1,16 +1,24 @@
 ---
 title: "Reproducible Research: Peer Assessment 1"
+author: "by Fabio Bianchini"
+date: "18/04/2017"
 output: 
   html_document:
     keep_md: true
+
 ---
 ## 
+```{r opts, echo = FALSE}
+knitr::opts_chunk$set(
+  fig.path = "figure/")
+```
 
 ```{r Load Library, message=FALSE, warning=FALSE, include=FALSE}
 library(readr)
 library(dplyr)
 library(ggplot2)
 ```
+
 
 ```{r computetime, echo=FALSE}
 time <- format(Sys.time(), "%a %b %d %d %X %Y")

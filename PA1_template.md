@@ -1,11 +1,15 @@
 # Reproducible Research: Peer Assessment 1
+by Fabio Bianchini  
+18/04/2017  
 ## 
 
 
 
 
+
+
 ```
-## [1] "Mar Apr 18 18 17:21:47 2017"
+## [1] "Mar Apr 18 18 17:43:15 2017"
 ```
 
 ## Loading and preprocessing the data
@@ -143,7 +147,7 @@ hist(mean.steps.4day$mean, xlab = "Daily Number of Steps", main = "Total number 
 rug(mean.steps.4day$mean)
 ```
 
-![](PA1_template_files/figure-html/hist.mean.steps.4day-1.png)<!-- -->
+![](figure/hist.mean.steps.4day-1.png)<!-- -->
 
 #####3 - Calculate and report the **mean** and **median** of the total number of steps taken per day
 
@@ -248,7 +252,7 @@ tail(mean.steps.4interval)
 plot(mean.steps.4interval$interval,mean.steps.4interval$mean, type = 'l', lwd = 1, xlab = "5-minute interval in a day", ylab = "Average steps for day", col = "black", main ="The average daily activity pattern")
 ```
 
-![](PA1_template_files/figure-html/plot.mean.steps.4interval-1.png)<!-- -->
+![](figure/plot.mean.steps.4interval-1.png)<!-- -->
 
 #####2 - Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
@@ -377,7 +381,7 @@ hist(mean.steps.4day2$mean, xlab = "Daily Number of Steps", main = "Total number
 rug(mean.steps.4day2$mean)
 ```
 
-![](PA1_template_files/figure-html/make a histogram-1.png)<!-- -->
+![](figure/make a histogram-1.png)<!-- -->
 
 
 ```r
@@ -527,5 +531,5 @@ plot(df.weekday$interval,df.weekday$mean, type = 'l', lwd = 2, xlab = "5-minute 
 plot(df.weekend$interval,df.weekend$mean, type = 'l', lwd = 2, xlab = "5-minute interval in a day", ylab = "Average steps for day", col = "red", main ="The average daily activity pattern in Weekend")
 ```
 
-![](PA1_template_files/figure-html/plot.weekend.weekday-1.png)<!-- -->
+![](figure/plot.weekend.weekday-1.png)<!-- -->
 
