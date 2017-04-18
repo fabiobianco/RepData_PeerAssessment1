@@ -9,7 +9,7 @@ by Fabio Bianchini
 
 
 ```
-## [1] "Mar Apr 18 18 17:46:41 2017"
+## [1] "Mar Apr 18 18 17:52:05 2017"
 ```
 
 ## Loading and preprocessing the data
@@ -374,7 +374,6 @@ tail(mean.steps.4day2)
 ```
 
 #####2 - Make a histogram of the total number of steps taken each day
-
 
 ```r
 hist(mean.steps.4day2$mean, xlab = "Daily Number of Steps", main = "Total number of steps taken each day")
