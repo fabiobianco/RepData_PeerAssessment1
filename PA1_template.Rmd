@@ -158,6 +158,7 @@ df5 <- group_by(activity.new, date)
 tot.steps.4day2 <- summarise(df5, sum = sum(steps, na.rm = TRUE)) # Sum calculation
 head(tot.steps.4day2)
 tail(tot.steps.4day2)
+
 ```
 ```{r, mean tot.steps.4day2 }
 mean.steps2 <-mean(tot.steps.4day2$sum) # Mean of the total number of steps taken per day

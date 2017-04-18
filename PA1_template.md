@@ -9,7 +9,7 @@ by Fabio Bianchini
 
 
 ```
-## [1] "Mar Apr 18 18 17:52:05 2017"
+## [1] "Mar Apr 18 18 17:58:57 2017"
 ```
 
 ## Loading and preprocessing the data
