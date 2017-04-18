@@ -4,7 +4,7 @@
 
 
 ```
-## [1] "Mar Apr 18 18 16:40:34 2017"
+## [1] "Mar Apr 18 18 16:46:46 2017"
 ```
 
 ## Loading and preprocessing the data
