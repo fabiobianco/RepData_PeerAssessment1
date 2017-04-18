@@ -10,7 +10,7 @@ library(readr)
 library(dplyr)
 library(ggplot2)
 ```
-## Inserire info su versione del software e data!!!!!!!
+
 ```{r computetime, echo=FALSE}
 time <- format(Sys.time(), "%a %b %d %d %X %Y")
 time

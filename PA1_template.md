@@ -1,10 +1,10 @@
 # Reproducible Research: Peer Assessment 1
 ## 
 
-## Inserire info su versione del software e data!!!!!!!
+
 
 ```
-## [1] "Mar Apr 18 18 16:29:09 2017"
+## [1] "Mar Apr 18 18 16:40:34 2017"
 ```
 
 ## Loading and preprocessing the data
